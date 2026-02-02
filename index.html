@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opsora Agency | Professional Card</title>
+    <title>Opsora Agency</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --white: #ffffff;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +27,7 @@
         }
         
         body {
-            background: #f8fafc;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,148 +35,283 @@
             padding: 20px;
         }
         
+        /* Main Card Container */
         .agency-card {
             width: 100%;
             max-width: 420px;
-            background: white;
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e8edf2;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--gray-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .agency-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0, 40, 85, 0.08);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
         }
         
+        /* Header Section */
         .card-header {
-            background: #0f172a;
-            padding: 30px 25px;
+            background: var(--primary);
+            padding: 40px 30px 30px;
             text-align: center;
-            color: white;
             position: relative;
         }
         
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
-        }
-        
         .logo-container {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
             border-radius: 50%;
-            background: white;
+            background: var(--white);
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            border: 3px solid #3b82f6;
+            border: 3px solid var(--white);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent-light));
+            z-index: -1;
         }
         
         .logo-img {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 65%;
+            max-height: 65%;
             object-fit: contain;
         }
         
         .logo-fallback {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 800;
-            color: #1e40af;
+            color: var(--primary);
             letter-spacing: -1px;
         }
         
         .agency-name {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            margin-bottom: 6px;
-            color: white;
+            margin-bottom: 8px;
+            color: var(--white);
         }
         
         .agency-tagline {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 400;
             color: #cbd5e1;
-            letter-spacing: 0.3px;
+            line-height: 1.5;
             max-width: 320px;
             margin: 0 auto;
-            line-height: 1.5;
         }
         
-        .card-body {
+        .instagram-handle {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Action Buttons - Top Section */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 30px;
+            background: var(--light);
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .action-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .btn-whatsapp {
+            background: var(--success);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+        
+        .btn-whatsapp:hover {
+            background: #0da271;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-website {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-website:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Content Section */
+        .card-content {
             padding: 30px;
         }
         
         .section {
-            margin-bottom: 28px;
+            margin-bottom: 30px;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
         }
         
         .section-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #f1f5f9;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
         }
         
         .section-title i {
-            color: #1e40af;
-            font-size: 14px;
+            color: var(--accent);
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            background: #eff6ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
+        /* About Section */
+        .about-content {
+            background: var(--light);
+            border-radius: 14px;
+            padding: 22px;
+            line-height: 1.7;
+            color: var(--primary-light);
+            font-size: 15px;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+        }
+        
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
         
         .service-item {
-            background: #f8fafc;
-            border: 1px solid #e8edf2;
-            border-radius: 8px;
-            padding: 12px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #334155;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            border-radius: 10px;
+            padding: 16px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
             text-align: center;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             cursor: default;
         }
         
         .service-item:hover {
             background: #eff6ff;
-            border-color: #3b82f6;
-            color: #1e40af;
+            border-color: var(--accent-light);
+            color: var(--accent);
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.08);
         }
         
+        /* Contact Information */
         .contact-info {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 18px;
-            border: 1px solid #f1f5f9;
+            background: var(--light);
+            border-radius: 14px;
+            padding: 22px;
+            border: 1px solid var(--gray-light);
         }
         
         .contact-row {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #475569;
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: var(--primary-light);
         }
         
         .contact-row:last-child {
@@ -172,71 +319,45 @@
         }
         
         .contact-row i {
-            width: 32px;
-            color: #1e40af;
-            font-size: 14px;
+            width: 36px;
+            color: var(--accent);
+            font-size: 16px;
         }
         
         .contact-row span {
             flex: 1;
+            word-break: break-word;
         }
         
-        .action-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 24px;
-        }
-        
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.2s ease;
+        .copy-btn {
+            color: var(--accent);
+            background: none;
             border: none;
             cursor: pointer;
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-left: 10px;
+            transition: all 0.2s;
         }
         
-        .btn-whatsapp {
-            background: #25D366;
-            color: white;
+        .copy-btn:hover {
+            background: rgba(37, 99, 235, 0.1);
         }
         
-        .btn-whatsapp:hover {
-            background: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
-        }
-        
-        .btn-website {
-            background: #1e40af;
-            color: white;
-        }
-        
-        .btn-website:hover {
-            background: #1e3a8a;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.2);
-        }
-        
+        /* Social Media Section */
         .social-section {
             margin-top: 30px;
             padding-top: 25px;
-            border-top: 1px solid #f1f5f9;
+            border-top: 1px solid var(--gray-light);
         }
         
         .social-title {
             text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            color: #64748b;
-            margin-bottom: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 18px;
             letter-spacing: 0.5px;
         }
         
@@ -247,53 +368,79 @@
         }
         
         .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f8fafc;
-            color: #475569;
-            font-size: 16px;
+            background: var(--light);
+            color: var(--primary-light);
+            font-size: 18px;
             text-decoration: none;
-            transition: all 0.2s ease;
-            border: 1px solid #e8edf2;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-light);
         }
         
         .social-icon:hover {
-            background: #1e40af;
-            color: white;
-            border-color: #1e40af;
+            background: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
         }
         
+        /* Footer */
         .card-footer {
-            padding: 18px 30px;
-            background: #0f172a;
+            padding: 20px 30px;
+            background: var(--primary);
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             color: #cbd5e1;
             letter-spacing: 0.3px;
         }
         
         .footer-highlight {
-            color: #60a5fa;
+            color: var(--accent-light);
             font-weight: 600;
         }
         
-        .instagram-handle {
-            color: #60a5fa;
-            font-weight: 600;
-            margin-top: 6px;
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            border-radius: 12px;
+            padding: 16px 24px;
+            color: var(--white);
             font-size: 14px;
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 90%;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast i {
+            color: var(--accent-light);
+            font-size: 18px;
         }
         
         /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(15px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -302,17 +449,22 @@
         }
         
         .fade-in {
-            animation: fadeInUp 0.6s ease-out;
+            animation: fadeInUp 0.7s ease-out;
         }
         
-        /* Responsive adjustments */
+        /* Responsive Design */
         @media (max-width: 480px) {
             .agency-card {
                 max-width: 100%;
+                border-radius: 20px;
             }
             
-            .card-body {
+            .card-header, .card-content, .action-buttons {
                 padding: 25px 20px;
+            }
+            
+            .agency-name {
+                font-size: 26px;
             }
             
             .services-grid {
@@ -322,40 +474,30 @@
             .action-buttons {
                 grid-template-columns: 1fr;
             }
+            
+            .social-icons {
+                gap: 14px;
+            }
+            
+            .social-icon {
+                width: 42px;
+                height: 42px;
+            }
         }
         
-        /* Copy feedback */
-        .copy-feedback {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1e40af;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        
-        .copy-feedback.show {
-            opacity: 1;
-            transform: translateY(0);
+        @media (min-width: 768px) {
+            .agency-card {
+                max-width: 420px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="agency-card fade-in" id="opsoraCard">
-        <div class="header-overlay"></div>
-        
+        <!-- Header -->
         <div class="card-header">
             <div class="logo-container">
-                <!-- Logo image with fallback -->
-                <img src="https://via.placeholder.com/80x80/1e40af/ffffff?text=O" alt="Opsora Agency Logo" class="logo-img" id="logoImg" onerror="showLogoFallback()">
+                <img src="https://cdn-icons-png.flaticon.com/512/2173/2173475.png" alt="Opsora Agency Logo" class="logo-img" id="logoImg" onerror="showLogoFallback()">
                 <div class="logo-fallback" id="logoFallback">O</div>
             </div>
             
@@ -364,11 +506,40 @@
             <div class="instagram-handle">@opsora.agency</div>
         </div>
         
-        <div class="card-body">
+        <!-- Action Buttons - Top Section -->
+        <div class="action-buttons">
+            <a href="https://wa.me/918401765505" target="_blank" class="action-btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>Contact Us</span>
+            </a>
+            
+            <a href="https://opsora-agency.com" target="_blank" class="action-btn btn-website" id="websiteBtn">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Visit Website</span>
+            </a>
+        </div>
+        
+        <!-- Content -->
+        <div class="card-content">
+            <!-- About Section -->
             <div class="section">
                 <div class="section-title">
-                    <i class="fas fa-layer-group"></i>
-                    <span>Professional Services</span>
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Opsora Agency</span>
+                </div>
+                
+                <div class="about-content">
+                    <p>Opsora Agency helps businesses grow through <span class="highlight">result-driven digital marketing</span> that builds visibility, trust, and consistent lead flow. From brand positioning and content to social media, search, and paid campaigns, we focus on strategies that attract the right audience and turn attention into real opportunities.</p>
+                    
+                    <p>Alongside marketing, Opsora Agency designs <span class="highlight">smart automation systems</span> that simplify operations and scale growth. By connecting CRM, lead management, and automated follow-ups, we help businesses save time, respond faster, and convert more leads - so growth runs smoothly, even when you're offline.</p>
+                </div>
+            </div>
+            
+            <!-- Services Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-cube"></i>
+                    <span>Our Services</span>
                 </div>
                 
                 <div class="services-grid" id="servicesGrid">
@@ -376,6 +547,7 @@
                 </div>
             </div>
             
+            <!-- Contact Information -->
             <div class="section">
                 <div class="section-title">
                     <i class="fas fa-address-card"></i>
@@ -384,16 +556,25 @@
                 
                 <div class="contact-info">
                     <div class="contact-row">
-                        <i class="fas fa-globe-americas"></i>
+                        <i class="fas fa-globe"></i>
                         <span id="websiteUrl">opsora-agency.com</span>
+                        <button class="copy-btn" data-copy="opsora-agency.com">
+                            <i class="far fa-copy"></i>
+                        </button>
                     </div>
                     <div class="contact-row">
                         <i class="fas fa-envelope"></i>
                         <span id="emailAddress">contact@opsora-agency.com</span>
+                        <button class="copy-btn" data-copy="contact@opsora-agency.com">
+                            <i class="far fa-copy"></i>
+                        </button>
                     </div>
                     <div class="contact-row">
                         <i class="fas fa-phone"></i>
                         <span id="phoneNumber">+1 (555) 123-4567</span>
+                        <button class="copy-btn" data-copy="+1 (555) 123-4567">
+                            <i class="far fa-copy"></i>
+                        </button>
                     </div>
                     <div class="contact-row">
                         <i class="fas fa-map-marker-alt"></i>
@@ -402,18 +583,7 @@
                 </div>
             </div>
             
-            <div class="action-buttons">
-                <a href="https://wa.me/918401765505" target="_blank" class="action-btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>Contact Us</span>
-                </a>
-                
-                <a href="https://opsora-agency.com" target="_blank" class="action-btn btn-website" id="websiteBtn">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>Visit Website</span>
-                </a>
-            </div>
-            
+            <!-- Social Media -->
             <div class="social-section">
                 <div class="social-title">Connect With Us</div>
                 
@@ -434,13 +604,18 @@
             </div>
         </div>
         
+        <!-- Footer -->
         <div class="card-footer">
             <p>Elevating brands through <span class="footer-highlight">digital innovation</span> since 2018</p>
-            <p class="instagram-handle">Book a strategy session today</p>
+            <p style="margin-top: 6px;">Book a strategy session today</p>
         </div>
     </div>
     
-    <div class="copy-feedback" id="copyFeedback">Copied to clipboard!</div>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
 
     <script>
         // Agency data
@@ -450,10 +625,10 @@
                 "Brand Identity", 
                 "Web Development", 
                 "UI/UX Design", 
-                "Social Media Management", 
-                "Content Marketing",
+                "Social Media Marketing", 
+                "Content Creation",
                 "SEO & Analytics",
-                "E-Commerce Solutions"
+                "Marketing Automation"
             ],
             contact: {
                 website: "opsora-agency.com",
@@ -482,7 +657,9 @@
         const linkedinLink = document.getElementById('linkedinLink');
         const twitterLink = document.getElementById('twitterLink');
         const dribbbleLink = document.getElementById('dribbbleLink');
-        const copyFeedback = document.getElementById('copyFeedback');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const copyButtons = document.querySelectorAll('.copy-btn');
         const logoImg = document.getElementById('logoImg');
         const logoFallback = document.getElementById('logoFallback');
 
@@ -520,23 +697,23 @@
         twitterLink.href = agencyData.socialLinks.twitter;
         dribbbleLink.href = agencyData.socialLinks.dribbble;
 
-        // Copy-to-clipboard functionality for contact info
-        const contactRows = document.querySelectorAll('.contact-row span');
-        contactRows.forEach(row => {
-            row.style.cursor = 'pointer';
-            row.addEventListener('click', function() {
-                const textToCopy = this.textContent;
+        // Copy-to-clipboard functionality
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const textToCopy = button.getAttribute('data-copy');
                 navigator.clipboard.writeText(textToCopy).then(() => {
-                    showCopyFeedback();
+                    showToast('Copied to clipboard!');
                 });
             });
         });
 
-        // Show copy feedback
-        function showCopyFeedback() {
-            copyFeedback.classList.add('show');
+        // Toast notification function
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
             setTimeout(() => {
-                copyFeedback.classList.remove('show');
+                toast.classList.remove('show');
             }, 2000);
         }
 
@@ -559,18 +736,18 @@
             serviceItems.forEach((item, index) => {
                 setTimeout(() => {
                     item.style.opacity = '0';
-                    item.style.transform = 'translateY(5px)';
-                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    item.style.transform = 'translateY(8px)';
                     
                     setTimeout(() => {
+                        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                         item.style.opacity = '1';
                         item.style.transform = 'translateY(0)';
                     }, 10);
-                }, index * 50);
+                }, index * 60);
             });
         });
 
-        // Add WhatsApp functionality with pre-filled message
+        // WhatsApp button with pre-filled message
         const whatsappBtn = document.querySelector('.btn-whatsapp');
         whatsappBtn.href = `https://wa.me/${agencyData.whatsappNumber}?text=Hello%20Opsora%20Agency%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.`;
 
@@ -578,24 +755,70 @@
         const serviceItems = document.querySelectorAll('.service-item');
         serviceItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Remove active class from all items
-                serviceItems.forEach(i => i.style.background = '#f8fafc');
-                serviceItems.forEach(i => i.style.color = '#334155');
-                serviceItems.forEach(i => i.style.borderColor = '#e8edf2');
-                
                 // Highlight clicked item
-                this.style.background = '#eff6ff';
-                this.style.color = '#1e40af';
-                this.style.borderColor = '#3b82f6';
+                const originalBg = this.style.background;
+                const originalColor = this.style.color;
+                const originalBorder = this.style.borderColor;
                 
-                // Reset after 2 seconds
+                this.style.background = '#eff6ff';
+                this.style.color = 'var(--accent)';
+                this.style.borderColor = 'var(--accent-light)';
+                
+                // Show toast with service name
+                showToast(`Selected: ${this.textContent}`);
+                
+                // Reset after 1.5 seconds
                 setTimeout(() => {
-                    this.style.background = '#f8fafc';
-                    this.style.color = '#334155';
-                    this.style.borderColor = '#e8edf2';
-                }, 2000);
+                    this.style.background = originalBg;
+                    this.style.color = originalColor;
+                    this.style.borderColor = originalBorder;
+                }, 1500);
             });
         });
+
+        // Add ripple effect to action buttons
+        const actionButtons = document.querySelectorAll('.action-btn');
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple element
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple element after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
