@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opsora Agency | Professional Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .agency-card {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e8edf2;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .agency-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 40, 85, 0.08);
+        }
+        
+        .card-header {
+            background: #0f172a;
+            padding: 30px 25px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
+        }
+        
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 3px solid #3b82f6;
+        }
+        
+        .logo-img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .logo-fallback {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1e40af;
+            letter-spacing: -1px;
+        }
+        
+        .agency-name {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            color: white;
+        }
+        
+        .agency-tagline {
+            font-size: 14px;
+            font-weight: 400;
+            color: #cbd5e1;
+            letter-spacing: 0.3px;
+            max-width: 320px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 28px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .section-title i {
+            color: #1e40af;
+            font-size: 14px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .service-item {
+            background: #f8fafc;
+            border: 1px solid #e8edf2;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #334155;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+        
+        .service-item:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 18px;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .contact-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #475569;
+        }
+        
+        .contact-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-row i {
+            width: 32px;
+            color: #1e40af;
+            font-size: 14px;
+        }
+        
+        .contact-row span {
+            flex: 1;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+        }
+        
+        .btn-website {
+            background: #1e40af;
+            color: white;
+        }
+        
+        .btn-website:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.2);
+        }
+        
+        .social-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .social-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8fafc;
+            color: #475569;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid #e8edf2;
+        }
+        
+        .social-icon:hover {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        .card-footer {
+            padding: 18px 30px;
+            background: #0f172a;
+            text-align: center;
+            font-size: 12px;
+            color: #cbd5e1;
+            letter-spacing: 0.3px;
+        }
+        
+        .footer-highlight {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+        
+        .instagram-handle {
+            color: #60a5fa;
+            font-weight: 600;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .agency-card {
+                max-width: 100%;
+            }
+            
+            .card-body {
+                padding: 25px 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Copy feedback */
+        .copy-feedback {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1e40af;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="agency-card fade-in" id="opsoraCard">
+        <div class="header-overlay"></div>
+        
+        <div class="card-header">
+            <div class="logo-container">
+                <!-- Logo image with fallback -->
+                <img src="https://via.placeholder.com/80x80/1e40af/ffffff?text=O" alt="Opsora Agency Logo" class="logo-img" id="logoImg" onerror="showLogoFallback()">
+                <div class="logo-fallback" id="logoFallback">O</div>
+            </div>
+            
+            <h1 class="agency-name">OPSORA AGENCY</h1>
+            <p class="agency-tagline">Strategic Digital Solutions & Brand Transformation Experts</p>
+            <div class="instagram-handle">@opsora.agency</div>
+        </div>
+        
+        <div class="card-body">
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Professional Services</span>
+                </div>
+                
+                <div class="services-grid" id="servicesGrid">
+                    <!-- Services populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-address-card"></i>
+                    <span>Contact Information</span>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-row">
+                        <i class="fas fa-globe-americas"></i>
+                        <span id="websiteUrl">opsora-agency.com</span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-envelope"></i>
+                        <span id="emailAddress">contact@opsora-agency.com</span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-phone"></i>
+                        <span id="phoneNumber">+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="location">Global Digital Agency</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="https://wa.me/918401765505" target="_blank" class="action-btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Contact Us</span>
+                </a>
+                
+                <a href="https://opsora-agency.com" target="_blank" class="action-btn btn-website" id="websiteBtn">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Visit Website</span>
+                </a>
+            </div>
+            
+            <div class="social-section">
+                <div class="social-title">Connect With Us</div>
+                
+                <div class="social-icons">
+                    <a href="https://instagram.com/opsora.agency" target="_blank" class="social-icon" id="instagramLink">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/opsora-agency" target="_blank" class="social-icon" id="linkedinLink">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://twitter.com/opsora_agency" target="_blank" class="social-icon" id="twitterLink">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://dribbble.com/opsora-agency" target="_blank" class="social-icon" id="dribbbleLink">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <p>Elevating brands through <span class="footer-highlight">digital innovation</span> since 2018</p>
+            <p class="instagram-handle">Book a strategy session today</p>
+        </div>
+    </div>
+    
+    <div class="copy-feedback" id="copyFeedback">Copied to clipboard!</div>
+
+    <script>
+        // Agency data
+        const agencyData = {
+            services: [
+                "Digital Strategy",
+                "Brand Identity", 
+                "Web Development", 
+                "UI/UX Design", 
+                "Social Media Management", 
+                "Content Marketing",
+                "SEO & Analytics",
+                "E-Commerce Solutions"
+            ],
+            contact: {
+                website: "opsora-agency.com",
+                email: "contact@opsora-agency.com",
+                phone: "+1 (555) 123-4567",
+                location: "Global Digital Agency"
+            },
+            socialLinks: {
+                instagram: "https://instagram.com/opsora.agency",
+                linkedin: "https://linkedin.com/company/opsora-agency",
+                twitter: "https://twitter.com/opsora_agency",
+                dribbble: "https://dribbble.com/opsora-agency"
+            },
+            websiteUrl: "https://opsora-agency.com",
+            whatsappNumber: "918401765505"
+        };
+
+        // DOM elements
+        const servicesGrid = document.getElementById('servicesGrid');
+        const websiteUrl = document.getElementById('websiteUrl');
+        const emailAddress = document.getElementById('emailAddress');
+        const phoneNumber = document.getElementById('phoneNumber');
+        const locationElement = document.getElementById('location');
+        const websiteBtn = document.getElementById('websiteBtn');
+        const instagramLink = document.getElementById('instagramLink');
+        const linkedinLink = document.getElementById('linkedinLink');
+        const twitterLink = document.getElementById('twitterLink');
+        const dribbbleLink = document.getElementById('dribbbleLink');
+        const copyFeedback = document.getElementById('copyFeedback');
+        const logoImg = document.getElementById('logoImg');
+        const logoFallback = document.getElementById('logoFallback');
+
+        // Function to show logo fallback if image fails to load
+        function showLogoFallback() {
+            logoImg.style.display = 'none';
+            logoFallback.style.display = 'flex';
+        }
+
+        // Try to load actual logo.png
+        logoImg.src = 'logo.png';
+        logoImg.onerror = showLogoFallback;
+        
+        // Hide fallback initially
+        logoFallback.style.display = 'none';
+
+        // Populate services
+        agencyData.services.forEach(service => {
+            const serviceItem = document.createElement('div');
+            serviceItem.className = 'service-item';
+            serviceItem.textContent = service;
+            servicesGrid.appendChild(serviceItem);
+        });
+
+        // Populate contact information
+        websiteUrl.textContent = agencyData.contact.website;
+        emailAddress.textContent = agencyData.contact.email;
+        phoneNumber.textContent = agencyData.contact.phone;
+        locationElement.textContent = agencyData.contact.location;
+
+        // Set up links
+        websiteBtn.href = agencyData.websiteUrl;
+        instagramLink.href = agencyData.socialLinks.instagram;
+        linkedinLink.href = agencyData.socialLinks.linkedin;
+        twitterLink.href = agencyData.socialLinks.twitter;
+        dribbbleLink.href = agencyData.socialLinks.dribbble;
+
+        // Copy-to-clipboard functionality for contact info
+        const contactRows = document.querySelectorAll('.contact-row span');
+        contactRows.forEach(row => {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function() {
+                const textToCopy = this.textContent;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showCopyFeedback();
+                });
+            });
+        });
+
+        // Show copy feedback
+        function showCopyFeedback() {
+            copyFeedback.classList.add('show');
+            setTimeout(() => {
+                copyFeedback.classList.remove('show');
+            }, 2000);
+        }
+
+        // Add hover effect to the entire card
+        const card = document.getElementById('opsoraCard');
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-4px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+
+        // Add animation when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            card.classList.add('fade-in');
+            
+            // Animate service items sequentially
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(5px)';
+                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                }, index * 50);
+            });
+        });
+
+        // Add WhatsApp functionality with pre-filled message
+        const whatsappBtn = document.querySelector('.btn-whatsapp');
+        whatsappBtn.href = `https://wa.me/${agencyData.whatsappNumber}?text=Hello%20Opsora%20Agency%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.`;
+
+        // Service items interactive effect
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                serviceItems.forEach(i => i.style.background = '#f8fafc');
+                serviceItems.forEach(i => i.style.color = '#334155');
+                serviceItems.forEach(i => i.style.borderColor = '#e8edf2');
+                
+                // Highlight clicked item
+                this.style.background = '#eff6ff';
+                this.style.color = '#1e40af';
+                this.style.borderColor = '#3b82f6';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    this.style.background = '#f8fafc';
+                    this.style.color = '#334155';
+                    this.style.borderColor = '#e8edf2';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
