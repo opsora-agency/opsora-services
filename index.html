@@ -3,822 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opsora Agency</title>
+    <title>Opsora Agency | Digital Presence</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
-            --primary: #0f172a;
-            --primary-light: #1e293b;
-            --accent: #2563eb;
-            --accent-light: #3b82f6;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --gray-light: #e2e8f0;
-            --success: #10b981;
-            --white: #ffffff;
+            /* Maximum Transparency & Blurry Matte Look */
+            --glass-bg: rgba(255, 255, 255, 0.03); 
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            background: #000;
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: hidden;
         }
-        
-        /* Main Card Container */
-        .agency-card {
-            width: 100%;
-            max-width: 420px;
-            background: var(--white);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--gray-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .agency-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
-        }
-        
-        /* Header Section */
-        .card-header {
-            background: var(--primary);
-            padding: 40px 30px 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .logo-container {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 25px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 3px solid var(--white);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-        }
-        
-        .logo-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), var(--accent-light));
+
+        /* --- Background Stars --- */
+        .space-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
         }
-        
-        .logo-img {
-            max-width: 65%;
-            max-height: 65%;
-            object-fit: contain;
+
+        .star { position: absolute; background: #fff; border-radius: 50%; opacity: 0.4; }
+
+        /* --- Main Blurry Card --- */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 1050px;
+            display: flex;
+            flex-direction: column; /* Vertical wrapper for Footer */
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.8);
         }
-        
-        .logo-fallback {
-            font-size: 40px;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -1px;
+
+        .main-content {
+            display: flex;
+            flex-direction: row;
         }
+
+        .panel { padding: 45px; flex: 1; display: flex; flex-direction: column; }
         
-        .agency-name {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            color: var(--white);
-        }
-        
-        .agency-tagline {
-            font-size: 15px;
-            font-weight: 400;
-            color: #cbd5e1;
-            line-height: 1.5;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-        
-        .instagram-handle {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--accent-light);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Action Buttons - Top Section */
-        .action-buttons {
+        .left-panel { border-right: 1px solid var(--glass-border); flex: 1.2; }
+
+        /* --- Brand Identity --- */
+        .brand-header { text-align: center; margin-bottom: 35px; }
+        .logo-img { max-width: 130px; margin-bottom: 12px; opacity: 0.9; }
+        .agency-title { font-size: 1.6rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
+
+        /* --- Action Buttons --- */
+        .action-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 30px;
-            background: var(--light);
-            border-bottom: 1px solid var(--gray-light);
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
         }
-        
-        .action-btn {
+
+        .btn {
+            text-decoration: none;
+            color: #fff;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            transition: 0.3s ease;
         }
-        
-        .action-btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        
-        .action-btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-        
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-        
-        .btn-whatsapp {
-            background: var(--success);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
-        }
-        
-        .btn-whatsapp:hover {
-            background: #0da271;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-        }
-        
-        .btn-website {
-            background: var(--accent);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
-        }
-        
-        .btn-website:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        /* Content Section */
-        .card-content {
-            padding: 30px;
-        }
-        
-        .section {
+
+        .btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.4); }
+        .btn-white { background: rgba(255, 255, 255, 0.9); color: #000; }
+        .btn-white:hover { background: #fff; transform: translateY(-2px); }
+
+        /* --- Sections --- */
+        h2 { font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 18px; color: var(--text-dim); text-transform: uppercase; }
+        .about-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 15px; }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 30px;
         }
-        
-        .section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 18px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light);
-        }
-        
-        .section-title i {
-            color: var(--accent);
-            font-size: 16px;
-            width: 36px;
-            height: 36px;
-            background: #eff6ff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* About Section */
-        .about-content {
-            background: var(--light);
-            border-radius: 14px;
-            padding: 22px;
-            line-height: 1.7;
-            color: var(--primary-light);
-            font-size: 15px;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .about-content p {
-            margin-bottom: 15px;
-        }
-        
-        .about-content p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        
+
         .service-item {
-            background: var(--light);
-            border: 1px solid var(--gray-light);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 10px 12px;
             border-radius: 10px;
-            padding: 16px 12px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        
-        .service-item:hover {
-            background: #eff6ff;
-            border-color: var(--accent-light);
-            color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.08);
-        }
-        
-        /* Contact Information */
-        .contact-info {
-            background: var(--light);
-            border-radius: 14px;
-            padding: 22px;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .contact-row {
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            margin-bottom: 16px;
-            font-size: 15px;
-            color: var(--primary-light);
+            gap: 8px;
         }
-        
-        .contact-row:last-child {
-            margin-bottom: 0;
+
+        /* --- Contact --- */
+        .contact-list { list-style: none; margin-bottom: 25px; }
+        .contact-list li { 
+            font-size: 0.85rem; 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            color: var(--text-dim);
         }
-        
-        .contact-row i {
-            width: 36px;
-            color: var(--accent);
-            font-size: 16px;
-        }
-        
-        .contact-row span {
-            flex: 1;
-            word-break: break-word;
-        }
-        
-        .copy-btn {
-            color: var(--accent);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            padding: 6px 10px;
-            border-radius: 6px;
-            margin-left: 10px;
-            transition: all 0.2s;
-        }
-        
-        .copy-btn:hover {
-            background: rgba(37, 99, 235, 0.1);
-        }
-        
-        /* Social Media Section */
-        .social-section {
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid var(--gray-light);
-        }
-        
-        .social-title {
-            text-align: center;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--gray);
-            margin-bottom: 18px;
-            letter-spacing: 0.5px;
-        }
-        
-        .social-icons {
+        .contact-list i { color: #fff; font-size: 0.9rem; }
+
+        .social-row {
+            margin-top: auto;
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 25px;
+            padding: 20px 0;
         }
-        
-        .social-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--light);
-            color: var(--primary-light);
-            font-size: 18px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .social-icon:hover {
-            background: var(--accent);
-            color: var(--white);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
-        }
-        
-        /* Footer */
+
+        .social-row a { color: var(--text-dim); font-size: 1.2rem; transition: 0.3s; }
+        .social-row a:hover { color: #fff; }
+
+        /* --- Footer --- */
         .card-footer {
-            padding: 20px 30px;
-            background: var(--primary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
             text-align: center;
-            font-size: 13px;
-            color: #cbd5e1;
-            letter-spacing: 0.3px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
         }
-        
-        .footer-highlight {
-            color: var(--accent-light);
-            font-weight: 600;
-        }
-        
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--primary);
-            border-radius: 12px;
-            padding: 16px 24px;
-            color: var(--white);
-            font-size: 14px;
-            z-index: 100;
-            opacity: 0;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            max-width: 90%;
-        }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        
-        .toast i {
-            color: var(--accent-light);
-            font-size: 18px;
-        }
-        
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.7s ease-out;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .agency-card {
-                max-width: 100%;
-                border-radius: 20px;
-            }
-            
-            .card-header, .card-content, .action-buttons {
-                padding: 25px 20px;
-            }
-            
-            .agency-name {
-                font-size: 26px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-icons {
-                gap: 14px;
-            }
-            
-            .social-icon {
-                width: 42px;
-                height: 42px;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .agency-card {
-                max-width: 420px;
-            }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 850px) {
+            .main-content { flex-direction: column; }
+            .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 35px 25px; }
+            .panel { padding: 35px 25px; }
+            .action-grid { grid-template-columns: 1fr; }
+            .services-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="agency-card fade-in" id="opsoraCard">
-        <!-- Header -->
-        <div class="card-header">
-            <div class="logo-container">
-                <img src="https://cdn-icons-png.flaticon.com/512/2173/2173475.png" alt="Opsora Agency Logo" class="logo-img" id="logoImg" onerror="showLogoFallback()">
-                <div class="logo-fallback" id="logoFallback">O</div>
-            </div>
-            
-            <h1 class="agency-name">OPSORA AGENCY</h1>
-            <p class="agency-tagline">Strategic Digital Solutions & Brand Transformation Experts</p>
-            <div class="instagram-handle">@opsora.agency</div>
-        </div>
-        
-        <!-- Action Buttons - Top Section -->
-        <div class="action-buttons">
-            <a href="https://wa.me/918401765505" target="_blank" class="action-btn btn-whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span>Contact Us</span>
-            </a>
-            
-            <a href="https://opsora-agency.com" target="_blank" class="action-btn btn-website" id="websiteBtn">
-                <i class="fas fa-external-link-alt"></i>
-                <span>Visit Website</span>
-            </a>
-        </div>
-        
-        <!-- Content -->
-        <div class="card-content">
-            <!-- About Section -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-info-circle"></i>
-                    <span>About Opsora Agency</span>
+
+    <div class="space-bg" id="bg"></div>
+
+    <main class="card">
+        <div class="main-content">
+            <section class="panel left-panel">
+                <div class="brand-header">
+                    <img src="logo.png" alt="Logo" class="logo-img">
+                    <h1 class="agency-title">Opsora Agency</h1>
                 </div>
-                
-                <div class="about-content">
-                    <p>Opsora Agency helps businesses grow through <span class="highlight">result-driven digital marketing</span> that builds visibility, trust, and consistent lead flow. From brand positioning and content to social media, search, and paid campaigns, we focus on strategies that attract the right audience and turn attention into real opportunities.</p>
-                    
-                    <p>Alongside marketing, Opsora Agency designs <span class="highlight">smart automation systems</span> that simplify operations and scale growth. By connecting CRM, lead management, and automated follow-ups, we help businesses save time, respond faster, and convert more leads - so growth runs smoothly, even when you're offline.</p>
-                </div>
-            </div>
-            
-            <!-- Services Section -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-cube"></i>
-                    <span>Our Services</span>
-                </div>
-                
-                <div class="services-grid" id="servicesGrid">
-                    <!-- Services populated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Contact Information -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-address-card"></i>
-                    <span>Contact Information</span>
-                </div>
-                
-                <div class="contact-info">
-                    <div class="contact-row">
-                        <i class="fas fa-globe"></i>
-                        <span id="websiteUrl">opsora-agency.com</span>
-                        <button class="copy-btn" data-copy="opsora-agency.com">
-                            <i class="far fa-copy"></i>
-                        </button>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fas fa-envelope"></i>
-                        <span id="emailAddress">contact@opsora-agency.com</span>
-                        <button class="copy-btn" data-copy="contact@opsora-agency.com">
-                            <i class="far fa-copy"></i>
-                        </button>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fas fa-phone"></i>
-                        <span id="phoneNumber">+1 (555) 123-4567</span>
-                        <button class="copy-btn" data-copy="+1 (555) 123-4567">
-                            <i class="far fa-copy"></i>
-                        </button>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span id="location">Global Digital Agency</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Social Media -->
-            <div class="social-section">
-                <div class="social-title">Connect With Us</div>
-                
-                <div class="social-icons">
-                    <a href="https://instagram.com/opsora.agency" target="_blank" class="social-icon" id="instagramLink">
-                        <i class="fab fa-instagram"></i>
+
+                <div class="action-grid">
+                    <a href="https://wa.me/918401765505" class="btn btn-white">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://linkedin.com/company/opsora-agency" target="_blank" class="social-icon" id="linkedinLink">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="https://opsora.com" class="btn">
+                        <i class="fas fa-globe"></i> Website
                     </a>
-                    <a href="https://twitter.com/opsora_agency" target="_blank" class="social-icon" id="twitterLink">
-                        <i class="fab fa-twitter"></i>
+                    <a href="tel:+918401765505" class="btn">
+                        <i class="fas fa-phone"></i> Call Now
                     </a>
-                    <a href="https://dribbble.com/opsora-agency" target="_blank" class="social-icon" id="dribbbleLink">
-                        <i class="fab fa-dribbble"></i>
+                    <a href="#" id="emailBtn" class="btn">
+                        <i class="fas fa-envelope"></i> Email Us
                     </a>
                 </div>
-            </div>
+
+                <h2>About</h2>
+                <p class="about-text">
+                    Opsora Agency helps businesses grow through result-driven digital marketing that builds visibility, trust, and consistent lead flow. 
+                </p>
+                <p class="about-text">
+                    We design smart automation systems that simplify operations. By connecting CRM and automated follow-ups, growth runs smoothly.
+                </p>
+            </section>
+
+            <section class="panel">
+                <h2>Services</h2>
+                <div class="services-container">
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Digital Marketing</div>
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> CRM Automation</div>
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Lead Generation</div>
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Brand Strategy</div>
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Paid Campaigns</div>
+                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Content Design</div>
+                </div>
+
+                <h2>Contact Information</h2>
+                <ul class="contact-list">
+                    <li><i class="fas fa-location-dot"></i> Digital Headquarters, India</li>
+                    <li><i class="fas fa-envelope"></i> opsoraagency@gmail.com</li>
+                    <li><i class="fas fa-phone-alt"></i> +91 84017 65505</li>
+                </ul>
+
+                <a href="#" class="btn" style="width: 100%; background: rgba(255,255,255,0.08);">
+                    <i class="fas fa-paper-plane"></i> Book Inquiry
+                </a>
+
+                <div class="social-row">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </section>
         </div>
-        
-        <!-- Footer -->
-        <div class="card-footer">
-            <p>Elevating brands through <span class="footer-highlight">digital innovation</span> since 2018</p>
-            <p style="margin-top: 6px;">Book a strategy session today</p>
-        </div>
-    </div>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Copied to clipboard!</span>
-    </div>
+
+        <footer class="card-footer">
+            &copy; 2026 Opsora Agency. All rights reserved. | Empowering Digital Innovation.
+        </footer>
+    </main>
 
     <script>
-        // Agency data
-        const agencyData = {
-            services: [
-                "Digital Strategy",
-                "Brand Identity", 
-                "Web Development", 
-                "UI/UX Design", 
-                "Social Media Marketing", 
-                "Content Creation",
-                "SEO & Analytics",
-                "Marketing Automation"
-            ],
-            contact: {
-                website: "opsora-agency.com",
-                email: "contact@opsora-agency.com",
-                phone: "+1 (555) 123-4567",
-                location: "Global Digital Agency"
-            },
-            socialLinks: {
-                instagram: "https://instagram.com/opsora.agency",
-                linkedin: "https://linkedin.com/company/opsora-agency",
-                twitter: "https://twitter.com/opsora_agency",
-                dribbble: "https://dribbble.com/opsora-agency"
-            },
-            websiteUrl: "https://opsora-agency.com",
-            whatsappNumber: "918401765505"
+        // Generate Star Background
+        const bg = document.getElementById('bg');
+        for (let i = 0; i < 120; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 1.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            bg.appendChild(star);
+        }
+
+        // Email Handling with opsoraagency@gmail.com
+        document.getElementById('emailBtn').onclick = (e) => {
+            e.preventDefault();
+            const mail = "opsoraagency@gmail.com";
+            const sub = "Project Inquiry | Opsora Agency";
+            const body = "Hello Opsora Team,\n\nI am reaching out via your Instagram card. I am interested in your digital growth and automation services.\n\nPlease let me know a good time to discuss further.\n\nBest regards,";
+            window.location.href = `mailto:${mail}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
         };
-
-        // DOM elements
-        const servicesGrid = document.getElementById('servicesGrid');
-        const websiteUrl = document.getElementById('websiteUrl');
-        const emailAddress = document.getElementById('emailAddress');
-        const phoneNumber = document.getElementById('phoneNumber');
-        const locationElement = document.getElementById('location');
-        const websiteBtn = document.getElementById('websiteBtn');
-        const instagramLink = document.getElementById('instagramLink');
-        const linkedinLink = document.getElementById('linkedinLink');
-        const twitterLink = document.getElementById('twitterLink');
-        const dribbbleLink = document.getElementById('dribbbleLink');
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toastMessage');
-        const copyButtons = document.querySelectorAll('.copy-btn');
-        const logoImg = document.getElementById('logoImg');
-        const logoFallback = document.getElementById('logoFallback');
-
-        // Function to show logo fallback if image fails to load
-        function showLogoFallback() {
-            logoImg.style.display = 'none';
-            logoFallback.style.display = 'flex';
-        }
-
-        // Try to load actual logo.png
-        logoImg.src = 'logo.png';
-        logoImg.onerror = showLogoFallback;
-        
-        // Hide fallback initially
-        logoFallback.style.display = 'none';
-
-        // Populate services
-        agencyData.services.forEach(service => {
-            const serviceItem = document.createElement('div');
-            serviceItem.className = 'service-item';
-            serviceItem.textContent = service;
-            servicesGrid.appendChild(serviceItem);
-        });
-
-        // Populate contact information
-        websiteUrl.textContent = agencyData.contact.website;
-        emailAddress.textContent = agencyData.contact.email;
-        phoneNumber.textContent = agencyData.contact.phone;
-        locationElement.textContent = agencyData.contact.location;
-
-        // Set up links
-        websiteBtn.href = agencyData.websiteUrl;
-        instagramLink.href = agencyData.socialLinks.instagram;
-        linkedinLink.href = agencyData.socialLinks.linkedin;
-        twitterLink.href = agencyData.socialLinks.twitter;
-        dribbbleLink.href = agencyData.socialLinks.dribbble;
-
-        // Copy-to-clipboard functionality
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const textToCopy = button.getAttribute('data-copy');
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    showToast('Copied to clipboard!');
-                });
-            });
-        });
-
-        // Toast notification function
-        function showToast(message) {
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
-
-        // Add hover effect to the entire card
-        const card = document.getElementById('opsoraCard');
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-4px)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-        });
-
-        // Add animation when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            card.classList.add('fade-in');
-            
-            // Animate service items sequentially
-            const serviceItems = document.querySelectorAll('.service-item');
-            serviceItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(8px)';
-                    
-                    setTimeout(() => {
-                        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, 10);
-                }, index * 60);
-            });
-        });
-
-        // WhatsApp button with pre-filled message
-        const whatsappBtn = document.querySelector('.btn-whatsapp');
-        whatsappBtn.href = `https://wa.me/${agencyData.whatsappNumber}?text=Hello%20Opsora%20Agency%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.`;
-
-        // Service items interactive effect
-        const serviceItems = document.querySelectorAll('.service-item');
-        serviceItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Highlight clicked item
-                const originalBg = this.style.background;
-                const originalColor = this.style.color;
-                const originalBorder = this.style.borderColor;
-                
-                this.style.background = '#eff6ff';
-                this.style.color = 'var(--accent)';
-                this.style.borderColor = 'var(--accent-light)';
-                
-                // Show toast with service name
-                showToast(`Selected: ${this.textContent}`);
-                
-                // Reset after 1.5 seconds
-                setTimeout(() => {
-                    this.style.background = originalBg;
-                    this.style.color = originalColor;
-                    this.style.borderColor = originalBorder;
-                }, 1500);
-            });
-        });
-
-        // Add ripple effect to action buttons
-        const actionButtons = document.querySelectorAll('.action-btn');
-        actionButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Create ripple element
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple-animation 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                `;
-                
-                this.appendChild(ripple);
-                
-                // Remove ripple element after animation
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
