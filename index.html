@@ -214,31 +214,27 @@
             font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
+        }
+
+        .service-item i {
+            color: #10b981;
+            font-size: 0.9rem;
+            width: 20px;
         }
 
         .service-item span {
             color: var(--text-main);
             font-weight: 500;
-        }
-
-        .service-item .service-icon {
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
+            flex: 1;
         }
 
         .service-item:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255,255,255,0.4);
             transform: translateY(-2px);
-        }
-
-        .service-item:hover .service-icon {
-            color: var(--text-main);
-            transform: translateX(3px);
         }
 
         /* --- Contact --- */
@@ -354,17 +350,7 @@
             font-size: 0.8rem;
             color: var(--text-dim);
             letter-spacing: 1px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
             line-height: 1.5;
-        }
-
-        .instagram-handle {
-            font-weight: 600;
-            color: var(--text-main);
-            margin-top: 3px;
-            font-size: 0.85rem;
         }
 
         /* --- Copy Toast --- */
@@ -480,28 +466,28 @@
                 <h2><i class="fas fa-cogs"></i> Services</h2>
                 <div class="services-container" id="servicesContainer">
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>Digital Marketing</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>CRM Automation</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>Lead Generation</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>Brand Strategy</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>Paid Campaigns</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                     <div class="service-item">
+                        <i class="fas fa-check-circle"></i>
                         <span>Content Design</span>
-                        <i class="fas fa-arrow-right service-icon"></i>
                     </div>
                 </div>
 
@@ -545,16 +531,14 @@
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a href="https://twitter.com/opsora_agency" target="_blank" title="Twitter">
-                        <i class="fab fa-x-twitter"></i>
+                        <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </section>
         </div>
 
         <footer class="card-footer">
-            <div>&copy; 2026 Opsora Agency. All rights reserved.</div>
-            <div class="instagram-handle">@opsora.agency</div>
-            <div>Empowering Digital Innovation Since 2018</div>
+            &copy; 2026 Opsora Agency. All rights reserved.
         </footer>
     </main>
 
@@ -669,10 +653,13 @@
             card.style.boxShadow = '0 25px 80px rgba(0,0,0,0.8)';
         });
 
-        // Improve logo fallback
+        // Improve logo fallback - using logo.png
         const logoImg = document.querySelector('.logo-img');
         logoImg.onerror = function() {
-            this.src = 'https://cdn-icons-png.flaticon.com/512/2173/2173475.png';
+            this.src = 'logo.png';
+            this.onerror = function() {
+                this.src = 'https://cdn-icons-png.flaticon.com/512/2173/2173475.png';
+            };
         };
     </script>
 </body>
