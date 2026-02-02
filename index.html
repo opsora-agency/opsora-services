@@ -237,20 +237,20 @@
             transform: translateY(-2px);
         }
 
-        /* --- Contact --- */
+        /* --- Contact --- (Reduced Spacing) */
         .contact-list { 
             list-style: none; 
-            margin-bottom: 30px; 
+            margin-bottom: 25px; 
         }
 
         .contact-list li { 
             font-size: 0.9rem; 
-            margin-bottom: 15px; 
+            margin-bottom: 10px; /* Reduced from 15px */
             display: flex; 
             align-items: center; 
-            gap: 15px; 
+            gap: 12px; /* Reduced from 15px */
             color: var(--text-dim);
-            padding: 10px 0;
+            padding: 8px 0; /* Reduced from 10px 0 */
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
@@ -261,8 +261,8 @@
 
         .contact-list .contact-icon { 
             color: var(--text-main); 
-            font-size: 1rem; 
-            width: 30px;
+            font-size: 0.95rem; /* Slightly smaller */
+            width: 24px; /* Reduced from 30px */
             text-align: center;
         }
 
@@ -270,22 +270,23 @@
             flex: 1;
             color: var(--text-main);
             font-weight: 500;
+            font-size: 0.88rem; /* Slightly smaller */
         }
 
         .copy-btn {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
             color: var(--text-dim);
-            width: 34px;
-            height: 34px;
+            width: 32px; /* Reduced from 34px */
+            height: 32px; /* Reduced from 34px */
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-left: 10px;
+            font-size: 0.85rem; /* Slightly smaller */
+            margin-left: 8px; /* Reduced from 10px */
         }
 
         .copy-btn:hover {
@@ -344,13 +345,48 @@
         /* --- Footer --- */
         .card-footer {
             background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            text-align: center;
+            padding: 18px 20px; /* Adjusted padding */
             border-top: 1px solid var(--glass-border);
             font-size: 0.8rem;
             color: var(--text-dim);
             letter-spacing: 1px;
             line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .footer-text {
+            text-align: center;
+            flex: 1;
+        }
+
+        /* --- Share Button --- */
+        .share-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255,255,255,0.4);
+            color: var(--text-main);
+            transform: translateY(-50%) scale(1.1);
         }
 
         /* --- Copy Toast --- */
@@ -406,6 +442,19 @@
                 font-size: 1.2rem;
                 border-radius: 10px;
             }
+            .card-footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .share-btn {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin-top: 5px;
+                align-self: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -419,7 +468,7 @@
             }
             .contact-list li {
                 font-size: 0.85rem;
-                gap: 12px;
+                gap: 10px; /* Further reduced for mobile */
             }
         }
     </style>
@@ -538,13 +587,18 @@
         </div>
 
         <footer class="card-footer">
-            &copy; 2026 Opsora Agency. All rights reserved.
+            <div class="footer-text">
+                &copy; 2026 Opsora Agency. All rights reserved.
+            </div>
+            <button class="share-btn" id="shareCardBtn" title="Share Card">
+                <i class="fas fa-share-alt"></i>
+            </button>
         </footer>
     </main>
 
     <div class="copy-toast" id="copyToast">
         <i class="fas fa-check-circle"></i>
-        <span>Copied to clipboard!</span>
+        <span id="toastMessage">Copied to clipboard!</span>
     </div>
 
     <script>
@@ -572,10 +626,52 @@
             window.open(`mailto:${mail}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`);
         };
 
+        // Share Card Functionality
+        document.getElementById('shareCardBtn').addEventListener('click', async () => {
+            const cardData = {
+                title: 'Opsora Agency | Digital Presence',
+                text: 'Check out Opsora Agency - Digital Growth & Automation Experts',
+                url: window.location.href
+            };
+
+            try {
+                if (navigator.share) {
+                    // Use Web Share API if available
+                    await navigator.share(cardData);
+                    showToast('Card shared successfully!');
+                } else {
+                    // Fallback: Copy link to clipboard
+                    await navigator.clipboard.writeText(window.location.href);
+                    showToast('Link copied to clipboard!');
+                }
+            } catch (err) {
+                console.log('Share cancelled or error:', err);
+                // Fallback for browsers that don't support clipboard API
+                if (!navigator.clipboard) {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = window.location.href;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showToast('Link copied to clipboard!');
+                }
+            }
+        });
+
         // Copy to clipboard functionality
         const copyButtons = document.querySelectorAll('.copy-btn');
         const copyToast = document.getElementById('copyToast');
+        const toastMessage = document.getElementById('toastMessage');
         
+        function showToast(message) {
+            toastMessage.textContent = message;
+            copyToast.classList.add('show');
+            setTimeout(() => {
+                copyToast.classList.remove('show');
+            }, 2000);
+        }
+
         copyButtons.forEach(button => {
             button.addEventListener('click', async () => {
                 const textToCopy = button.getAttribute('data-copy');
@@ -583,7 +679,7 @@
                     await navigator.clipboard.writeText(textToCopy);
                     
                     // Show toast
-                    copyToast.classList.add('show');
+                    showToast('Copied to clipboard!');
                     
                     // Visual feedback on button
                     const originalHTML = button.innerHTML;
@@ -593,7 +689,6 @@
                     button.style.color = '#10b981';
                     
                     setTimeout(() => {
-                        copyToast.classList.remove('show');
                         button.innerHTML = originalHTML;
                         button.style.background = '';
                         button.style.borderColor = '';
@@ -610,11 +705,7 @@
                     document.execCommand('copy');
                     document.body.removeChild(textArea);
                     
-                    copyToast.querySelector('span').textContent = 'Copied!';
-                    copyToast.classList.add('show');
-                    setTimeout(() => {
-                        copyToast.classList.remove('show');
-                    }, 2000);
+                    showToast('Copied!');
                 }
             });
         });
