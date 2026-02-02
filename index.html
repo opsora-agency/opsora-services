@@ -9,9 +9,10 @@
         :root {
             /* Maximum Transparency & Blurry Matte Look */
             --glass-bg: rgba(255, 255, 255, 0.03); 
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.6);
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --accent: #3b82f6;
         }
 
         * {
@@ -40,7 +41,18 @@
             background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
         }
 
-        .star { position: absolute; background: #fff; border-radius: 50%; opacity: 0.4; }
+        .star { 
+            position: absolute; 
+            background: #fff; 
+            border-radius: 50%; 
+            opacity: 0.3; 
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.4; }
+        }
 
         /* --- Main Blurry Card --- */
         .card {
@@ -52,9 +64,14 @@
             width: 100%;
             max-width: 1050px;
             display: flex;
-            flex-direction: column; /* Vertical wrapper for Footer */
+            flex-direction: column;
             overflow: hidden;
             box-shadow: 0 25px 80px rgba(0,0,0,0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .main-content {
@@ -62,106 +79,362 @@
             flex-direction: row;
         }
 
-        .panel { padding: 45px; flex: 1; display: flex; flex-direction: column; }
+        .panel { 
+            padding: 45px; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
         
-        .left-panel { border-right: 1px solid var(--glass-border); flex: 1.2; }
+        .left-panel { 
+            border-right: 1px solid var(--glass-border); 
+            flex: 1.2; 
+        }
 
         /* --- Brand Identity --- */
-        .brand-header { text-align: center; margin-bottom: 35px; }
-        .logo-img { max-width: 130px; margin-bottom: 12px; opacity: 0.9; }
-        .agency-title { font-size: 1.6rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
+        .brand-header { 
+            text-align: center; 
+            margin-bottom: 35px; 
+        }
+        .logo-img { 
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px; 
+            opacity: 0.95;
+            border-radius: 50%;
+            object-fit: contain;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--glass-border);
+        }
+        .agency-title { 
+            font-size: 1.6rem; 
+            letter-spacing: 3px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
 
         /* --- Action Buttons --- */
         .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover { 
+            background: rgba(255, 255, 255, 0.15); 
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-white { 
+            background: rgba(255, 255, 255, 0.95); 
+            color: #000; 
+            font-weight: 700;
+        }
+
+        .btn-white:hover { 
+            background: #fff; 
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+        }
+
+        /* --- Sections --- */
+        h2 { 
+            font-size: 0.9rem; 
+            letter-spacing: 2px; 
+            margin-bottom: 20px; 
+            color: var(--text-dim); 
+            text-transform: uppercase; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 i {
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+            margin-left: 10px;
+        }
+
+        .about-text { 
+            font-size: 0.9rem; 
+            line-height: 1.7; 
+            color: var(--text-dim); 
+            margin-bottom: 15px; 
+        }
+
+        /* --- Services --- */
+        .services-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 30px;
         }
 
-        .btn {
-            text-decoration: none;
-            color: #fff;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+        .service-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
-            transition: 0.3s ease;
-        }
-
-        .btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.4); }
-        .btn-white { background: rgba(255, 255, 255, 0.9); color: #000; }
-        .btn-white:hover { background: #fff; transform: translateY(-2px); }
-
-        /* --- Sections --- */
-        h2 { font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 18px; color: var(--text-dim); text-transform: uppercase; }
-        .about-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 15px; }
-
-        .services-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .service-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            padding: 10px 12px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-item span {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .service-item .service-icon {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .service-item:hover .service-icon {
+            color: var(--text-main);
+            transform: translateX(3px);
         }
 
         /* --- Contact --- */
-        .contact-list { list-style: none; margin-bottom: 25px; }
+        .contact-list { 
+            list-style: none; 
+            margin-bottom: 30px; 
+        }
+
         .contact-list li { 
-            font-size: 0.85rem; 
-            margin-bottom: 12px; 
+            font-size: 0.9rem; 
+            margin-bottom: 15px; 
             display: flex; 
             align-items: center; 
-            gap: 12px; 
+            gap: 15px; 
             color: var(--text-dim);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .contact-list i { color: #fff; font-size: 0.9rem; }
 
+        .contact-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .contact-list .contact-icon { 
+            color: var(--text-main); 
+            font-size: 1rem; 
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-text {
+            flex: 1;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255,255,255,0.4);
+            color: var(--text-main);
+            transform: translateY(-1px);
+        }
+
+        /* --- Social Icons --- */
         .social-row {
             margin-top: auto;
             display: flex;
             justify-content: center;
-            gap: 25px;
-            padding: 20px 0;
+            gap: 20px;
+            padding: 25px 0 10px;
         }
 
-        .social-row a { color: var(--text-dim); font-size: 1.2rem; transition: 0.3s; }
-        .social-row a:hover { color: #fff; }
+        .social-row a { 
+            color: var(--text-main); 
+            font-size: 1.3rem; 
+            transition: all 0.3s ease;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            text-decoration: none;
+        }
+
+        .social-row a:hover { 
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Book Inquiry Button --- */
+        .book-inquiry {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .book-inquiry:hover {
+            background: rgba(59, 130, 246, 0.25);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: #93c5fd;
+        }
 
         /* --- Footer --- */
         .card-footer {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             text-align: center;
             border-top: 1px solid var(--glass-border);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-dim);
             letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            line-height: 1.5;
+        }
+
+        .instagram-handle {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 3px;
+            font-size: 0.85rem;
+        }
+
+        /* --- Copy Toast --- */
+        .copy-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 14px 24px;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .copy-toast i {
+            color: #10b981;
+            font-size: 1rem;
         }
 
         /* --- Mobile Optimization --- */
         @media (max-width: 850px) {
             .main-content { flex-direction: column; }
-            .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 35px 25px; }
+            .left-panel { 
+                border-right: none; 
+                border-bottom: 1px solid var(--glass-border); 
+                padding: 35px 25px; 
+            }
             .panel { padding: 35px 25px; }
             .action-grid { grid-template-columns: 1fr; }
             .services-container { grid-template-columns: 1fr; }
+            .social-row {
+                gap: 15px;
+                padding: 20px 0 5px;
+            }
+            .social-row a {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panel { padding: 25px 20px; }
+            .agency-title { font-size: 1.3rem; }
+            .btn { padding: 14px; }
+            .logo-img {
+                width: 100px;
+                height: 100px;
+                padding: 15px;
+            }
+            .contact-list li {
+                font-size: 0.85rem;
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -173,15 +446,17 @@
         <div class="main-content">
             <section class="panel left-panel">
                 <div class="brand-header">
-                    <img src="logo.png" alt="Logo" class="logo-img">
-                    <h1 class="agency-title">Opsora Agency</h1>
+                    <img src="logo.png" alt="Opsora Agency Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2173/2173475.png'">
+                    <h1 class="agency-title">OPSORA AGENCY</h1>
+                    <div class="tagline">Digital Growth & Automation Experts</div>
                 </div>
 
                 <div class="action-grid">
-                    <a href="https://wa.me/918401765505" class="btn btn-white">
+                    <a href="https://wa.me/918401765505?text=Hello%20Opsora%20Agency,%20I'm%20interested%20in%20your%20services" 
+                       class="btn btn-white" target="_blank">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://opsora.com" class="btn">
+                    <a href="https://opsora.com" class="btn" target="_blank">
                         <i class="fas fa-globe"></i> Website
                     </a>
                     <a href="tel:+918401765505" class="btn">
@@ -192,7 +467,7 @@
                     </a>
                 </div>
 
-                <h2>About</h2>
+                <h2><i class="fas fa-info-circle"></i> About</h2>
                 <p class="about-text">
                     Opsora Agency helps businesses grow through result-driven digital marketing that builds visibility, trust, and consistent lead flow. 
                 </p>
@@ -202,52 +477,105 @@
             </section>
 
             <section class="panel">
-                <h2>Services</h2>
-                <div class="services-container">
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Digital Marketing</div>
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> CRM Automation</div>
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Lead Generation</div>
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Brand Strategy</div>
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Paid Campaigns</div>
-                    <div class="service-item"><i class="fas fa-check" style="font-size: 10px;"></i> Content Design</div>
+                <h2><i class="fas fa-cogs"></i> Services</h2>
+                <div class="services-container" id="servicesContainer">
+                    <div class="service-item">
+                        <span>Digital Marketing</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
+                    <div class="service-item">
+                        <span>CRM Automation</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
+                    <div class="service-item">
+                        <span>Lead Generation</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
+                    <div class="service-item">
+                        <span>Brand Strategy</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
+                    <div class="service-item">
+                        <span>Paid Campaigns</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
+                    <div class="service-item">
+                        <span>Content Design</span>
+                        <i class="fas fa-arrow-right service-icon"></i>
+                    </div>
                 </div>
 
-                <h2>Contact Information</h2>
+                <h2><i class="fas fa-address-card"></i> Contact</h2>
                 <ul class="contact-list">
-                    <li><i class="fas fa-location-dot"></i> Digital Headquarters, India</li>
-                    <li><i class="fas fa-envelope"></i> opsoraagency@gmail.com</li>
-                    <li><i class="fas fa-phone-alt"></i> +91 84017 65505</li>
+                    <li>
+                        <i class="fas fa-location-dot contact-icon"></i> 
+                        <span class="contact-text">Digital Headquarters, India</span>
+                        <button class="copy-btn" data-copy="Digital Headquarters, India">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope contact-icon"></i> 
+                        <span class="contact-text">opsoraagency@gmail.com</span>
+                        <button class="copy-btn" data-copy="opsoraagency@gmail.com">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt contact-icon"></i> 
+                        <span class="contact-text">+91 84017 65505</span>
+                        <button class="copy-btn" data-copy="+918401765505">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </li>
                 </ul>
 
-                <a href="#" class="btn" style="width: 100%; background: rgba(255,255,255,0.08);">
+                <a href="#" id="bookInquiry" class="btn book-inquiry">
                     <i class="fas fa-paper-plane"></i> Book Inquiry
                 </a>
 
                 <div class="social-row">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://instagram.com/opsora.agency" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/opsora-agency" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://facebook.com/opsoraagency" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/opsora_agency" target="_blank" title="Twitter">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
                 </div>
             </section>
         </div>
 
         <footer class="card-footer">
-            &copy; 2026 Opsora Agency. All rights reserved. | Empowering Digital Innovation.
+            <div>&copy; 2026 Opsora Agency. All rights reserved.</div>
+            <div class="instagram-handle">@opsora.agency</div>
+            <div>Empowering Digital Innovation Since 2018</div>
         </footer>
     </main>
 
+    <div class="copy-toast" id="copyToast">
+        <i class="fas fa-check-circle"></i>
+        <span>Copied to clipboard!</span>
+    </div>
+
     <script>
-        // Generate Star Background
+        // Generate animated stars
         const bg = document.getElementById('bg');
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 80; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 1.5;
+            const size = Math.random() * 2 + 0.5;
             star.style.width = size + 'px';
             star.style.height = size + 'px';
             star.style.top = Math.random() * 100 + '%';
             star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.opacity = Math.random() * 0.3 + 0.1;
             bg.appendChild(star);
         }
 
@@ -257,7 +585,94 @@
             const mail = "opsoraagency@gmail.com";
             const sub = "Project Inquiry | Opsora Agency";
             const body = "Hello Opsora Team,\n\nI am reaching out via your Instagram card. I am interested in your digital growth and automation services.\n\nPlease let me know a good time to discuss further.\n\nBest regards,";
-            window.location.href = `mailto:${mail}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
+            window.open(`mailto:${mail}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`);
+        };
+
+        // Copy to clipboard functionality
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const copyToast = document.getElementById('copyToast');
+        
+        copyButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const textToCopy = button.getAttribute('data-copy');
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    
+                    // Show toast
+                    copyToast.classList.add('show');
+                    
+                    // Visual feedback on button
+                    const originalHTML = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check"></i>';
+                    button.style.background = 'rgba(16, 185, 129, 0.2)';
+                    button.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                    button.style.color = '#10b981';
+                    
+                    setTimeout(() => {
+                        copyToast.classList.remove('show');
+                        button.innerHTML = originalHTML;
+                        button.style.background = '';
+                        button.style.borderColor = '';
+                        button.style.color = '';
+                    }, 2000);
+                    
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copyToast.querySelector('span').textContent = 'Copied!';
+                    copyToast.classList.add('show');
+                    setTimeout(() => {
+                        copyToast.classList.remove('show');
+                    }, 2000);
+                }
+            });
+        });
+
+        // Book Inquiry button - opens contact form
+        document.getElementById('bookInquiry').onclick = (e) => {
+            e.preventDefault();
+            const mail = "opsoraagency@gmail.com";
+            const sub = "Book Consultation | Opsora Agency";
+            const body = "Hello Opsora Team,\n\nI would like to book a consultation session to discuss:\n\n- [Briefly describe your project]\n- [Your budget range]\n- [Preferred timeline]\n\nPlease suggest some available time slots.\n\nBest regards,";
+            window.open(`mailto:${mail}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`);
+        };
+
+        // Service items hover effect
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Visual feedback
+                this.style.background = 'rgba(255, 255, 255, 0.15)';
+                this.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                
+                setTimeout(() => {
+                    this.style.background = '';
+                    this.style.borderColor = '';
+                }, 500);
+            });
+        });
+
+        // Card hover effect enhancement
+        const card = document.querySelector('.card');
+        card.addEventListener('mouseenter', () => {
+            card.style.boxShadow = '0 35px 100px rgba(0,0,0,0.9)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.boxShadow = '0 25px 80px rgba(0,0,0,0.8)';
+        });
+
+        // Improve logo fallback
+        const logoImg = document.querySelector('.logo-img');
+        logoImg.onerror = function() {
+            this.src = 'https://cdn-icons-png.flaticon.com/512/2173/2173475.png';
         };
     </script>
 </body>
